@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#8b72d9">
+<link rel="manifest" href="manifest.webmanifest">
+<title>OnlyUs — A little space just for us</title>
+<style>
+:root{--bg:#f7f4ff;--panel:#fff;--text:#27223a;--muted:#77718b;--accent:#8b72d9;--accent2:#f3ddea;--line:#e9e3f5;--mine:#e9e0ff;--theirs:#fff;--danger:#b3261e;--shadow:0 12px 35px #3a245a12}
+[data-theme="dark"]{--bg:#171521;--panel:#242130;--text:#f5f0ff;--muted:#b9b0ca;--accent:#b39aff;--accent2:#493448;--line:#393248;--mine:#46385f;--theirs:#302c3d;--danger:#ff9a92;--shadow:0 12px 35px #0003}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:14px;padding:11px 15px;background:var(--accent);color:white;font-weight:650}button.secondary{background:var(--accent2);color:var(--text)}button.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}button:disabled{opacity:.5;cursor:not-allowed}
+input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:var(--bg);color:var(--text);outline-color:var(--accent)}
+.wrap{max-width:860px;margin:0 auto;padding:18px;min-height:100dvh;display:flex;flex-direction:column}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 18px}.brand{display:flex;align-items:center;gap:10px}.logo{width:43px;height:43px;border-radius:15px;background:linear-gradient(135deg,#c3afff,#f3cde1);display:grid;place-items:center;font-size:23px;color:#4b356b}.brand h1{font-size:21px;margin:0}.sub{color:var(--muted);font-size:13px}.card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}.auth{width:100%;max-width:420px;margin:auto}.auth h2{margin:0 0 6px;font-size:26px}.field{display:grid;gap:7px;margin:15px 0}.field label{font-size:13px;color:var(--muted);font-weight:650}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.row>*{min-width:0}.grow{flex:1}.hidden{display:none!important}.notice{padding:11px 13px;border-radius:12px;background:var(--accent2);margin:12px 0;font-size:14px;white-space:pre-wrap}.notice.error{background:#ffe7e5;color:#8d211b}.chat-card{flex:1;display:flex;flex-direction:column;min-height:62vh;overflow:hidden;padding:0}.chat-head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.chat-head h2{margin:0;font-size:17px}.status{font-size:12px;color:var(--muted)}.messages{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:10px;min-height:300px;max-height:58dvh}.empty{margin:auto;text-align:center;color:var(--muted);max-width:280px}.bubble{max-width:min(82%,520px);padding:10px 13px;border-radius:17px;background:var(--theirs);border:1px solid var(--line);align-self:flex-start;overflow-wrap:anywhere}.bubble.mine{align-self:flex-end;background:var(--mine);border-color:transparent}.sender{font-size:11px;color:var(--muted);margin-bottom:3px}.stamp{font-size:10px;color:var(--muted);margin-top:5px;text-align:right}.bubble img{display:block;max-width:100%;max-height:300px;border-radius:10px;margin-top:4px}.bubble audio{max-width:100%;width:250px}.composer{border-top:1px solid var(--line);padding:13px;display:flex;gap:8px;align-items:flex-end}.composer input{flex:1;min-width:0}.iconbtn{padding:11px 12px;background:var(--accent2);color:var(--text)}.small{font-size:12px;color:var(--muted)}.footer{padding:12px 0;text-align:center;color:var(--muted);font-size:12px}.settings{display:flex;gap:8px;flex-wrap:wrap}.link{background:none;color:var(--accent);padding:0}.code{font-family:ui-monospace,monospace;letter-spacing:2px;font-weight:800}.busy{opacity:.6;pointer-events:none}
+@media(max-width:560px){.wrap{padding:12px}.card{padding:17px}.chat-card{min-height:68vh}.messages{max-height:58dvh;padding:12px}.composer{padding:9px;gap:6px}.composer button{padding:10px}.bubble{max-width:90%}.top{padding-bottom:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">♡</div><div><h1>OnlyUs</h1><div class="sub">A little space just for us</div></div></div>
+    <div class="settings"><button id="themeBtn" class="ghost" title="Toggle dark mode">☾</button><button id="signOutBtn" class="ghost hidden">Sign out</button></div>
+  </header>
+  <main id="authView" class="auth card">
+    <h2>Welcome to OnlyUs</h2><div class="sub">A personal chat space for two people.</div>
+    <div id="configNotice" class="notice">Before using the app, connect your Supabase project in app.js. See README.md for setup steps.</div>
+    <form id="authForm">
+      <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+      <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required></div>
+      <div class="row"><button id="loginBtn" type="submit" class="grow">Sign in</button><button id="signupBtn" type="button" class="secondary grow">Create account</button></div>
+    </form>
+    <div id="authMessage" class="notice hidden"></div>
+    <p class="small">Only invite someone who agrees to use the app. Notifications and screenshots may still reveal messages.</p>
+  </main>
+  <main id="pairView" class="hidden">
+    <section class="card">
+      <h2 style="margin-top:0">Your private conversation</h2>
+      <p class="sub">Create a conversation and share its one-time invitation code with the other person.</p>
+      <div class="row"><button id="createChatBtn">Create conversation</button><span class="small">or join using a code below</span></div>
+      <div id="inviteResult" class="notice hidden"></div>
+      <form id="joinForm" class="field"><label for="inviteCode">Invitation code</label><div class="row"><input id="inviteCode" class="grow code" maxlength="12" placeholder="ENTER CODE" required><button type="submit">Join</button></div></form>
+      <div id="pairMessage" class="notice hidden"></div>
+    </section>
+  </main>
+  <main id="chatView" class="hidden" style="flex:1;display:flex;flex-direction:column">
+    <section class="card chat-card">
+      <div class="chat-head"><div><h2>Our little space ♡</h2><div id="presenceText" class="status">Connecting…</div></div><button id="leaveChatBtn" class="ghost">Conversation info</button></div>
+      <div id="messages" class="messages"><div class="empty">Your little space starts here.<br><span class="small">Send your first message ♡</span></div></div>
+      <form id="composer" class="composer">
+        <button type="button" id="photoBtn" class="iconbtn" title="Share photo">＋</button>
+        <button type="button" id="voiceBtn" class="iconbtn" title="Record voice message">🎙</button>
+        <input id="messageInput" aria-label="Message" placeholder="Write a message…" maxlength="4000" autocomplete="off">
+        <button type="submit" id="sendBtn">Send</button>
+      </form>
+      <input id="photoInput" type="file" accept="image/*" class="hidden">
+      <div id="chatMessage" class="notice hidden" style="margin:0 13px 12px"></div>
+    </section>
+    <div class="footer">Private access depends on your backend security settings. This starter does not provide end-to-end encryption.</div>
+  </main>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
